@@ -15,3 +15,10 @@ class Employee:
     def show_info(self):
         salary = self.calculate_salary()
         print(f"{self.emp_id} - {self.name} ({self.emp_type}) : Rs. {salary}")
+        
+# Create employees
+ali = Employee(101, "ethan", "full-time", 60000)
+sara = Employee(102, "Alice", "part-time", [90, 500])
+ahmed = Employee(103, "Fatima", "full-time", 55000)
+zara = Employee(104, "Sarah", "part-time", [80, 600])
+

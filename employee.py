@@ -21,14 +21,32 @@ sara = Employee(102, "Sara", "part-time", [90, 500])
 ahmed = Employee(103, "Ahmed", "full-time", 55000)
 zara = Employee(104, "Zara", "part-time", [80, 600])
 
+# -------------------------------
+# ✅ READ Operation
+# -------------------------------
+
 print(" Employee Payroll Report:\n")
 ali.show_info()
 sara.show_info()
 ahmed.show_info()
 zara.show_info()
 
+# -------------------------------
+# ✅ UPDATE Operation (Zara)
+# -------------------------------
+
 zara.name = "Zara Khan"
 zara.salary_data = [80, 650]
 
 print("\n Updated Zara's Info:\n")
+zara.show_info()
+
+# -------------------------------
+# ✅ DELETE Operation (Remove Ahmed)
+# -------------------------------
+
+print("\n Removed Ahmed from report\n")
+print(" Final Payroll Report:\n")
+ali.show_info()
+sara.show_info()
 zara.show_info()

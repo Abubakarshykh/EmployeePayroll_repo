@@ -15,3 +15,11 @@ class Employee:
     def show_info(self):
         salary = self.calculate_salary()
         print(f"{self.emp_id} - {self.name} ({self.emp_type}) : Rs. {salary}")
+        
+    # ✅ READ operation
+print(" Employee Payroll Report:\n")
+ali.show_info()
+sara.show_info()
+ahmed.show_info()
+zara.show_info()
+

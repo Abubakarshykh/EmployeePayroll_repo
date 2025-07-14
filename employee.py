@@ -1,30 +1,58 @@
-class Employee:
-    def __init__(self, emp_id, name, emp_type, salary_data):
+from abc import ABC, abstractmethod
+
+# -------------------------------
+# Abstract Base Class
+# -------------------------------
+class Employee(ABC):
+    def __init__(self, emp_id, name):
         self.emp_id = emp_id
         self.name = name
-        self.emp_type = emp_type
-        self.salary_data = salary_data  # Monthly salary or [hours, rate]
 
+    @abstractmethod
     def calculate_salary(self):
-        if self.emp_type == "full-time":
-            return self.salary_data
-        elif self.emp_type == "part-time":
-            hours, rate = self.salary_data
-            return hours * rate
+        pass
 
     def show_info(self):
         salary = self.calculate_salary()
-        print(f"{self.emp_id} - {self.name} ({self.emp_type}) : Rs. {salary}")
-        
-        ali = Employee(101, "Ali", "full-time", 60000)
-sara = Employee(102, "Sara", "part-time", [90, 500])
-ahmed = Employee(103, "Ahmed", "full-time", 55000)
-zara = Employee(104, "Zara", "part-time", [80, 600])
+        print(f"{self.emp_id} - {self.name} ({self.__class__.__name__}) : Rs. {salary}")
+
 
 # -------------------------------
-# ✅ READ Operation
+# Full-Time Employee Subclass
 # -------------------------------
+class FullTimeEmployee(Employee):
+    def __init__(self, emp_id, name, monthly_salary):
+        super().__init__(emp_id, name)
+        self.monthly_salary = monthly_salary
 
+    def calculate_salary(self):
+        return self.monthly_salary
+
+
+# -------------------------------
+# Part-Time Employee Subclass
+# -------------------------------
+class PartTimeEmployee(Employee):
+    def __init__(self, emp_id, name, hours_worked, rate_per_hour):
+        super().__init__(emp_id, name)
+        self.hours_worked = hours_worked
+        self.rate_per_hour = rate_per_hour
+
+    def calculate_salary(self):
+        return self.hours_worked * self.rate_per_hour
+
+
+# -------------------------------
+# Creating Employee Objects
+# -------------------------------
+ali = FullTimeEmployee(101, "Ali", 60000)
+sara = PartTimeEmployee(102, "Sara", 90, 500)
+ahmed = FullTimeEmployee(103, "Ahmed", 55000)
+zara = PartTimeEmployee(104, "Zara", 80, 600)
+
+# -------------------------------
+# READ Operation
+# -------------------------------
 print(" Employee Payroll Report:\n")
 ali.show_info()
 sara.show_info()
@@ -32,19 +60,17 @@ ahmed.show_info()
 zara.show_info()
 
 # -------------------------------
-# ✅ UPDATE Operation (Zara)
+# UPDATE Operation (Zara)
 # -------------------------------
-
 zara.name = "Zara Khan"
-zara.salary_data = [80, 650]
+zara.rate_per_hour = 650
 
 print("\n Updated Zara's Info:\n")
 zara.show_info()
 
 # -------------------------------
-# ✅ DELETE Operation (Remove Ahmed)
+# DELETE Operation (Remove Ahmed)
 # -------------------------------
-
 print("\n Removed Ahmed from report\n")
 print(" Final Payroll Report:\n")
 ali.show_info()
